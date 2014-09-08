@@ -1,0 +1,5 @@
+You can use Wikipedia's data dumps. The XML data dump for English Wikipedia that includes current revisions only is about 31 GB, so I'd say it would be a good start for your research. The data dump is pretty big, so you should consider extracting the texts from XML with a SAX parser. WikiXMLJ is a handy Java API tuned for Wikipedia.
+
+And then, of course, there is always the Stack Exchange data dumps. The latest one includes all public non-beta Stack Exchange sites & corresponding Meta sites up until September 2011. But, naturally Stack Exchange posts are concentrated on the scope of each site, so probably not as generalized as you'd wish. Meta posts are a bit more general though, so you could consider those in addition to Wikipedia.
+
+I don't think you'll find anything better, especially in plain text. Several open data sets are available through the Data Hub, but I think the English Wikipedia data dump is very close to what you are looking for.

@@ -1,0 +1,4 @@
+To debug a word count program, I'd find sample files with known word
+counts, then process them and confirm the output is correct.
+Most likely, input that contains non-English languages would reveal bugs
+would reveal any problems.
