@@ -29,7 +29,7 @@ main()
         }
     }
 
-    for (i = max; i < 0; --i) {
+    for (i = max; i > 0; --i) {
         for (word_len = 0; word_len < MAXWORDLEN; ++word_len) {
             if (word_len_count[word_len] >= i) {
                 putchar('|');
