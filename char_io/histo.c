@@ -31,7 +31,7 @@ main()
     for (i = max; i > 0; --i) {
         int cn;
         for (cn = 0; cn < CHAR_RANGE; ++cn) {
-            if (nchar[cn] > i) {
+            if (nchar[cn] >= i) {
                 putchar('|');
             } else {
                 putchar(' ');
