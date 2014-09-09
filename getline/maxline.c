@@ -10,16 +10,20 @@ int main()
     int max;
     char line[MAXLINE];
     char longest[MAXLINE];
+    int c;
 
     max = 0;
     while ((len = my_getline(line, MAXLINE)) > 0) {
+        if (len + 1 == MAXLINE && line[len - 1] != '\n')
+            while ((c = getchar()) != EOF && c != '\n')
+                ++len;
         if (max < len) {
             max = len;
             copy(longest, line);
         }
     }
     if (max > 0) {
-        printf("%s", longest);
+        printf("%s\n%d", longest, max);
     }
     return 0;
 }
