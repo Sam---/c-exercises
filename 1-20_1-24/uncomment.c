@@ -1,56 +1,115 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-void block_comment(void);
-void line_comment(void);
-void indeterminate_comment(void);
-void indeterminate_end_comment(void);
-void string_literal(void);
-void string_escape(void);
+void block_comment(void); // ok
+void line_comment(void); // ok
+void indeterminate_comment(void); // ok
+int indeterminate_end_comment(void); // ok
+void string_literal(void); // ok
+void string_escape(void); // ok
 
 int main()
 {
     int c;
-    int state = 0;
-
-    while ((c = getchar()) != EOF) {
-        switch (state) {
-            case NORMAL:
-                switch (c) {
-                    case '/':
-                        state = HASSL; break;
-                    case '"':
-                        state == STRING; break;
-                    default:
-                        putchar(c);
-                } break;
-            case HASSL:
-                switch (c) {
-                    case '*':
-                        state = COMMENT;
-                    case '/':
-                        state = LCOMMENT;
-                    } else {
-                        putchar(c);
-                    }
+    while (1) {
+        switch (c = getchar()) {
+            case EOF:
+                exit(0); break;
+            case '/':
+                indeterminate_comment();
                 break;
-            case COMMENT:
-                if (c == '*') {
-                    state = HASSTAR;
-                }
+            case '"':
+                putchar(c);
+                string_literal();
                 break;
-            case HASSTAR:
-                if (c == '/') {
-                    state = NORMAL;
-                }
-                break;
-            case LCOMMENT:
-                if (c == '\n') {
-                    state = NORMAL;
-                    putchar(c);
-                }
-                break;
+            default:
+                putchar(c);
         }
     }
     return 0;
+}
+
+void indeterminate_comment(void)
+{
+    int c = getchar();
+    switch(c) {
+        case EOF:
+            exit(0); break;
+        case '*':
+            block_comment(); break;
+        case '/':
+            line_comment(); break;
+        default:
+            putchar(c);
+    }
+}
+
+void block_comment(void)
+{
+    int c;
+    while (1) {
+        switch (c = getchar()) {
+            case EOF:
+                exit(0); break;
+            case '*':
+                if (indeterminate_end_comment()) return; break;
+        }
+    }
+}
+
+void line_comment(void)
+{
+    int c;
+    while (1) {
+        switch(c = getchar()) {
+            case EOF:
+                exit(0); break;
+            case '\n':
+                putchar(c);
+                return;
+        }
+    }
+}
+
+int indeterminate_end_comment(void)
+{
+    int c = getchar();
+    switch (c) {
+        case EOF:
+            exit(0); break;
+        case '/':
+            return;
+        default:
+            putchar(c);
+            return 0;
+    }
+}
+
+void string_literal(void)
+{
+    int c;
+    while (1) {
+        switch (c = getchar()) {
+            case EOF:
+                exit(0); break;
+            case '\\':
+                string_escape(); break;
+            case '"':
+                putchar(c);
+                return;
+            default:
+                putchar(c);
+        }
+    }
+}
+
+void string_escape(void)
+{
+    int c = getchar();
+    if (c == EOF) {
+        exit(0);
+    }
+    putchar('\\');
+    putchar(c);
 }
 
