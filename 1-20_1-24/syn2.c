@@ -5,20 +5,25 @@
 #define YES    2 
 #define KINDA  3 
 
+#define MAXDEPTH 2048
+
 int line, col;
-int braces, brackets, parens;
+int bracelevel;
+char bracebuffer[MAXDEPTH];
 
 void balance(char);
 
 int main() {
     extern int line, col;
     extern int braces, brackets, parens;
+    extern char bracebuffer[MAXDEPTH];
+    extern int bracelevel;
 
     int incomment = NO;
     int instring = NO;
     int c;
 
-    braces = brackets = parens = 0;
+    bracelevel = 0;
     line = col = 1;
 
     while ((c = getchar()) != EOF) {
@@ -54,8 +59,7 @@ int main() {
                 col = 0;
                 break;
             case '~':
-                printf("('s: %d\n['s: %d\n{'s: %d\n", parens, brackets, braces);
-                break;
+                printf("%.*s\n", bracelevel, bracebuffer);
         }
         if (instring == KINDA && c != '\\')
             instring = YES;
@@ -68,43 +72,60 @@ int main() {
         if (incomment < YES && instring < YES)
             balance(c);
     }
-    if (brackets > 0)
-        printf("You need to close your brackets.\n");
-
-    if (braces > 0)
-        printf("You need to close your braces.\n");
-
-    if (parens > 0)
-        printf("You need to close your parenthesis.\n");
+    if (bracelevel > 0)
+        switch (bracebuffer[bracelevel - 1]) {
+            case '(':
+                printf("You need to close your parens.\n");
+                break;
+            case '[':
+                printf("You need to close your brackets.\n");
+                break;
+            case '{':
+                printf("You need to close your braces.\n");
+                break;
+    }
 
     return 0;
 }
 
 void balance(char c) {
     extern int line, col;
-    extern int braces, brackets, parens;
+    extern char bracebuffer[MAXDEPTH];
+    extern int bracelevel;
 
     switch (c) {
         case '[':
-            ++brackets; break;
+            if (bracelevel >= MAXDEPTH)
+                printf("Too many braces, brackets, and parens\n"
+                       "I don't want to know what your program"
+                       " looks like\n");
+            bracebuffer[bracelevel++] = c; 
+            break;
         case ']':
-            --brackets;
-            if (brackets < 0)
-                printf("%d:%d: Unbalanced brackets\n", line, col);
+            if (bracelevel <= 0 || bracebuffer[--bracelevel] != '[')
+                printf("%d:%d: Too many ]'s\n", line, col);
             break;
         case '(':
-            ++parens; break;
+            if (bracelevel >= MAXDEPTH)
+                printf("Too many braces, brackets, and parens\n"
+                       "I don't want to know what your program"
+                       " looks like\n");
+            bracebuffer[bracelevel++] = c; 
+            break;
         case ')':
-            --parens;
-            if (parens < 0)
-                printf("%d:%d: Unbalanced parens\n", line, col);
+            if (bracelevel <= 0 || bracebuffer[--bracelevel] != '(')
+                printf("%d:%d: Too many )'s\n", line, col);
             break;
         case '{':
-            ++braces; break;
+            if (bracelevel >= MAXDEPTH)
+                printf("Too many braces, brackets, and parens\n"
+                       "I don't want to know what your program"
+                       " looks like\n");
+            bracebuffer[bracelevel++] = c; 
+            break;
         case '}':
-            --braces;
-            if (braces < 0)
-                printf("%d:%d: Unbalanced braces\n", line, col);
+            if (bracelevel <= 0 || bracebuffer[--bracelevel] != '{')
+                printf("%d:%d: Too many }'s\n", line, col);
             break;
     }
 }
