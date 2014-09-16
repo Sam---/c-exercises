@@ -1,8 +1,5 @@
 #include <stdio.h>
 
-#define ENTAB 1
-#define DETAB 0
-
 #define TABSTOP 8
 
 #define INFO(fmt, ...) fprintf(stdout, "\e[31m" fmt "\e[0m", ##__VA_ARGS__)
@@ -50,7 +47,7 @@ int main()
 
 void indent(int start, int end)
 {
-#if MODE == ENTAB
+#if ENTAB
     int tbegin = tabup(start);
 
     if (end < tbegin) {
@@ -64,10 +61,8 @@ void indent(int start, int end)
         }
         pad(end - start);
     }
-#elif MODE == DETAB
-    pad(end - start);
 #else
-#   error
+    pad(end - start);
 #endif
 }
 
