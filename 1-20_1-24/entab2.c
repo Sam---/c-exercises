@@ -47,23 +47,7 @@ int main()
 
 void indent(int start, int end)
 {
-#if ENTAB
-    int tbegin = tabup(start);
-
-    if (end < tbegin) {
-        INFO("padding");
-        pad(end - start);
-    } else {
-        INFO("tabbing");
-        putchar('\t');
-        for (start = tbegin; start + 4 <= end; start += 4) {
-            putchar('\t');
-        }
-        pad(end - start);
-    }
-#else
-    pad(end - start);
-#endif
+    INFO("|%d|", end - start);
 }
 
 void pad(int n)
