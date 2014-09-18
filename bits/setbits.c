@@ -1,21 +1,27 @@
 #include <stdio.h>
-// n: _n_umber of bit to ignore?
-// p: bit _p_laces to return?
+
+#define MASK(n) ( ~(~0 << (n)) )
 
 unsigned getbits(unsigned val, int p, int n) {
-    return (val >> n) & ~(~0 << p);
+    unsigned lowbits = val >> (p + 1 - n);
+    return lowbits & MASK(n);
 }
 
 unsigned setbits(unsigned val, int p, int n, unsigned replace) {
-    return ((replace & ~(~0 << p)) << n) | (val & ~(~(~0 << p) << n));
+    unsigned mask = ~( MASK(n) << (p - n));
+    return (val & mask) | (getbits(replace) << (p - n));
 }
 
 unsigned invbits(unsigned val, int p, int n) {
-    return setbits(val, p, n, ~getbits(val, p, n));
+    unsigned inverted = ~getbits(val, p, n);
+    return setbits(val, p, n, inverted);
 }
 
 unsigned rightrot(unsigned val, int n) {
-    return (val >> n) | ((val & ~(~0 << n)) << n);
+    unsigned top = CHAR_BIT * sizeof val; 
+    unsigned low = val & MASK(n);
+    unsigned high = getbits(val, top, top - n);
+    return setbits(low, // continue here
 }
 
 int main() {
