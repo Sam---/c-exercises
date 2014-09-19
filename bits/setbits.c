@@ -1,38 +1,37 @@
+#include <limits.h>
 #include <stdio.h>
 
 #define MASK(n) ( ~(~0 << (n)) )
 
-unsigned getbits(unsigned val, int p, int n) {
-    unsigned lowbits = val >> (p + 1 - n);
-    return lowbits & MASK(n);
+unsigned getbits(unsigned val, int off, int bits) {
+    return (val >> off) & MASK(bits);
 }
 
-unsigned setbits(unsigned val, int p, int n, unsigned replace) {
-    unsigned mask = ~( MASK(n) << (p - n));
-    return (val & mask) | (getbits(replace) << (p - n));
+unsigned setbits(unsigned val, int off, int bits, unsigned rep) {
+    unsigned clearedval = val & ~(MASK(bits) << off);
+    return clearedval | (rep & MASK(bits)) << off;
 }
 
-unsigned invbits(unsigned val, int p, int n) {
-    unsigned inverted = ~getbits(val, p, n);
-    return setbits(val, p, n, inverted);
+unsigned invbits(unsigned val, int off, int bits) {
+    return val ^ (MASK(bits) << off);
 }
 
-unsigned rightrot(unsigned val, int n) {
-    unsigned top = CHAR_BIT * sizeof val; 
-    unsigned low = val & MASK(n);
-    unsigned high = getbits(val, top, top - n);
-    return setbits(low, // continue here
+unsigned rightrot(unsigned val, int bits) {
+    unsigned ulen = CHAR_BIT * sizeof val;
+    bits %= ulen;
+    unsigned lowbits = val & MASK(bits);
+    return val >> bits | lowbits << (ulen - bits);
 }
 
 int main() {
-    unsigned funbits = 0x1234678;
-    printf("0x67 = 0x%08x\n"
-           "0x1234f78 = 0x%08x\n"
-           "0x12dcba78 = 0x%08x\n"
-           "0x6781234 = 0x%08x\n",
+    unsigned funbits = 0x01234678;
+    printf("0x00000067 = 0x%08x\n"
+           "0x01234f78 = 0x%08x\n"
+           "0x0123..78 = 0x%08x\n"
+           "0x67801234 = 0x%08x\n",
             getbits(funbits, 4, 8),
             setbits(funbits, 8, 4, 0xf),
-            invbits(funbits, 8, 12),
+            invbits(funbits, 8, 8),
             rightrot(funbits, 12)
           );
     return 0;
