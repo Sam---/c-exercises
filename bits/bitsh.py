@@ -1,3 +1,21 @@
+# bitsh.py
+# 
+# Evaluates Python expressions and pronts the result in various bases
+# The promt is of the form "${mode}= ", where "mode" is the system to print
+#  numbers with.
+# To switch modes, type "mode [b|x|d]" at the prompt.
+# Example session:
+# 
+#   x= 16
+#   0xf
+#   x= 17
+#   0x1f
+#   x= mode b
+#   b= 2
+#   0b10
+#   b= 1 << 3
+#   0b1000
+
 mode = 'x'
 table = {'x': hex, 'b': bin, 'd': str}
 
