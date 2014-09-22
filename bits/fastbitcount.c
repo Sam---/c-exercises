@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 
+/* 2-9 */
 int bitcount(unsigned x) {
     int b = 0;
     while (x) {
