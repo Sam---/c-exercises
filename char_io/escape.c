@@ -7,9 +7,11 @@
 size_t escape(char in[], char out[]) {
     size_t inind = 0;
     size_t outind = 0;
+    char c;
 
     for (;in[inind]; inind++) {
-        switch (in[inind]) {
+        c = in[inind];
+        switch (c) {
             case '\\':
                 out[outind++] = '\\';
                 out[outind++] = '\\';
@@ -22,7 +24,28 @@ size_t escape(char in[], char out[]) {
                 out[outind++] = '\\';
                 out[outind++] = 't';
                 break;
+            case '\b':
+                out[outind++] = '\\';
+                out[outind++] = 'b';
+                break;
+            case '\e':
+                out[outind++] = '\\';
+                out[outind++] = 'e';
+                break;
+            case '\v':
+                out[outind++] = '\\';
+                out[outind++] = 'v';
+                break;
+            case '\f':
+                out[outind++] = '\\';
+                out[outind++] = 'f';
+                break;
+            case '\a':
+                out[outind++] = '\\';
+                out[outind++] = 'a';
+                break;
             default:
+                if (
                 out[outind++] = in[inind];
                 break;
         }
