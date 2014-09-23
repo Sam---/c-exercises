@@ -53,15 +53,15 @@ int exbinsearch(int tgt, int v[], int max) {
 int realbinsearch(int tgt, int v[], int max) {
     int high, mid, low;
     low = 0;
-    high = n - 1;
+    high = max - 1;
     mid = (low+high) / 2;
-    while (low <= high && x != v[mid]) {
-        if (x < v[mid])
+    while (low <= high && tgt != v[mid]) {
+        if (tgt < v[mid])
             high = mid - 1;
         else
             low = mid + 1;
     }
-    if (x== v[mid])
+    if (tgt == v[mid])
         return mid;
     else
         return -1;
