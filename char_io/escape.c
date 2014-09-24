@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "../sharedtools/shared.h"
 
 #define BUFMAX 1024
 #define BUF2MAX (BUFMAX * 2)
@@ -45,8 +46,14 @@ size_t escape(char in[], char out[]) {
                 out[outind++] = 'a';
                 break;
             default:
-                if (
-                out[outind++] = in[inind];
+                if (iscntrl(c)) {
+                    out[outind++] = '\\';
+                    out[outind++] = 'x';
+                    out[outind++] = "0123456789abcdef"[c & mask(4) << 4];
+                    out[outind++] = "0123456789abcdef"[c & mask(4)];
+                } else {
+                    out[outind++] = in[inind];
+                }
                 break;
         }
     }
@@ -54,7 +61,7 @@ size_t escape(char in[], char out[]) {
     return outind;
 }
 
-main()
+int main()
 {
     char buf[BUFMAX];
     char buf2[BUF2MAX];
