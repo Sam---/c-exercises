@@ -5,6 +5,7 @@
 
 #define BUFMAX 1024
 
+/* 3-3 */
 size_t expand(char src[], char buf[], size_t max) {
     int srcpos, bufpos;
     bool dashok = false;
