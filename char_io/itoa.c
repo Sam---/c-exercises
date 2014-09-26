@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <limits.h>
+#include <math.h>
 #include "../sharedtools/shared.h"
 
 void reverse(char s[]) {
@@ -17,46 +18,74 @@ void reverse(char s[]) {
 }
 
 /* 3-4 */
-void itoa(int n, char s[]) {
-    int i;
+size_t itoa(int n, char s[]) {
+    int digit;
     int sign;
-    bool doinc1 = false;
-
-    if (n == INT_MIN) {
-        n = INT_MAX;
-        doinc1 = true;
-    }
 
     sign = n;
-    if (n < 0) {
-        n = -n;
-    }
 
-    i = 0;
+    digit = 0;
     do {
-        s[i++] = n % 10 + '0';
+        s[digit++] = abs(n % 10) + '0';
         n /= 10;
-    } while (n > 0);
+    } while (n != 0);
 
     if (sign < 0) {
-        s[i++] = '-';
+        s[digit++] = '-';
     }
-    s[i] = '\0';
-
-    if (doinc1) {
-        size_t cell;
-        while (s[cell] == '9') {
-            s[cell++] = '0';
-        }
-        s[cell]++;
-    }
+    s[digit] = '\0';
 
     reverse(s);
+    return digit; // length of string, so caller can be fast
 }
 
+/* 3-6 */
+
+size_t itoam(int n, char s[], size_t min) {
+    size_t len;
+
+    len = itoa(n, s);
+    if (len < min) {
+        memmove(s + min - len, s, len + 1);
+        memset(s, 0x20, min - len);
+        return min;
+    }
+    return len;
+}
+
+/* 3-5 */
+size_t itob(unsigned n, char s[], int base) {
+    static char nums[62] = "0123456789" "abcdefghijklmnopqrstuvwxyz"
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    int digit;
+
+    if (base > 62) {
+        return 0;
+    }
+
+    digit = 0;
+    do {
+        s[digit++] = nums[n % base];
+        n /= base;
+    } while (n != 0);
+
+    s[digit] = '\0';
+
+    reverse(s);
+    return digit; // length of string, so caller can be fast
+}
+
+
+/* 3-6 */
 int main() {
     char s[1024];
     itoa(INT_MIN, s);
+    puts(s);
+    itob(UINT_MAX, s, 62);
+    puts(s);
+    itoam(6, s, 10);
+    puts(s);
+    itoam(INT_MAX, s, 3);
     puts(s);
     return 0;
 }
