@@ -33,7 +33,7 @@ double myatof(char s[]) {
         } else if (s[i] == '+') {
             i++;
         }
-        expo = exp(10, atoi(s+i));
+        expo = pow(10, atoi(s+i));
     }
     return expo * sign * val / power;
 }
