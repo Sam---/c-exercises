@@ -6,7 +6,7 @@
 
 double myatof(char s[]) {
     double val, power;
-    int i, sign, expo;
+    int i, sign, expo = 1;
 
     for (i = 0; isspace(s[i]); i++) /* skip white space */
         ;
