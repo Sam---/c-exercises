@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h
 #include <ctype.h>
 #include "../sharedtools/shared.h"
 
 double myatof(char s[]) {
     double val, power;
-    int i, sign;
+    int i, sign, expo;
 
     for (i = 0; isspace(s[i]); i++) /* skip white space */
         ;
@@ -32,9 +33,9 @@ double myatof(char s[]) {
         } else if (s[i] == '+') {
             i++;
         }
-        power *= atoi(s+i);
+        expo = exp(10, atoi(s+i));
     }
-    return sign * val / power;
+    return expo * sign * val / power;
 }
 
 int main(int argc, char **argv) {
