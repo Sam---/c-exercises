@@ -24,6 +24,16 @@ double myatof(char s[]) {
         val = 10.0 * val + (s[i] - '0');
         power *= 10.0;
     }
+    if (s[i] == 'e') {
+        i++;
+        if (s[i] == '-') {
+            i++;
+            sign = -sign;
+        } else if (s[i] == '+') {
+            i++;
+        }
+        power *= atoi(s+i);
+    }
     return sign * val / power;
 }
 
