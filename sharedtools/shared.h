@@ -16,9 +16,9 @@
 
 int vfinfo(FILE *stream, const char format[], va_list args) {
     int result;
-    fputs("\e[31m", stream);
+    fputs("\x1b[31m", stream);
     result = vfprintf(stream, format, args);
-    fputs("\e[0m", stream);
+    fputs("\x1b[0m", stream);
     return result;
 }
 
