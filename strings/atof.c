@@ -1,7 +1,7 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+#include <stdio.h>
 #include <ctype.h>
+#include <math.h>
 #include "../sharedtools/shared.h"
 
 double myatof(char s[]) {
