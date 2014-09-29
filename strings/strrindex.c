@@ -31,5 +31,6 @@ int strrindex(char haystack[], char needle[]) {
 
 int main() {
     printf("%d\n", strrindex("hayhayhayneedlehayhayhayneedlehay", "nee"));
+
     return EXIT_SUCCESS;
 }
