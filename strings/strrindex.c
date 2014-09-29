@@ -1,37 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stddef.h>
+#include <string.h>
 #include <stdbool.h>
 #include "../sharedtools/shared.h"
 
-/* 4-1 */
-ptrdiff_t strrindex(char haystack[], char needle[]) {
-    size_t hayind;
-    size_t neeind = 0;
-    ptrdiff_t prevfinal = -1;
-    ptrdiff_t final = -1;
-    bool inneedle = false;
+#define STRRINDEX_FAIL ((int)-1)
 
-    for (hayind = 0; haystack[hayind]; hayind++) {
-        if (haystack[hayind] == needle[neeind]) {
-            neeind++;
-            if (!inneedle) {
-                inneedle = true;
-                prevfinal = final;
-                final = hayind;
-            }
+/* 4-1 
+ * int as index is bad but ptrdiff_t is declared in a weird place 
+ */
+int strrindex(char haystack[], char needle[]) {
+    size_t haymax = strlen(haystack) - 1;
+    size_t neemax = strlen(needle) - 1;
+
+    size_t neeind = neemax;
+    size_t hayind = haymax;
+
+    for (;hayind > 0; hayind--) {
+        if (needle[neeind] == haystack[hayind]) {
+            neeind--;
         } else if (needle[neeind] == '\0') {
-            inneedle = false;
-            neeind = 0;
+            return hayind;
+        } else {
+            neeind = neemax;
         }
     }
-    if (needle[neeind] == '\0') {
-        return final;
-    } else {
-        return prevfinal;
-    }
-    return final;
+    return STRRINDEX_FAIL;
 }
+
 
 int main() {
     printf("%d\n", strrindex("hayhayhayneedlehayhayhayneedlehay", "nee"));
