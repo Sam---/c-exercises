@@ -6,7 +6,7 @@
 size_t fmygetline(char s[], size_t max, FILE *stream) {
     size_t chars;
     int c;
-    while ((c = fgetc(stream)) != EOF && (chars < max - 1) {
+    while ((c = fgetc(stream)) != EOF && (chars < max - 1)) {
         s[chars++] = (char)c;
         if (c == '\n') {
             break;
