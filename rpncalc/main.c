@@ -38,7 +38,7 @@ int main() {
                 break;
             case '%':
                 op2 = pop();
-                v = pop() % op2;
+                v = pop() / op2;
                 push(v - (int)v);
                 break;
             case 'e':
