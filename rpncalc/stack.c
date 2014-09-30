@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define MAXDEPTH
+#define MAXDEPTH 128
 
 int sp = 0;
 double val[MAXDEPTH];

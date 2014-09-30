@@ -28,7 +28,7 @@ int main() {
                 push(pop() - op2);
                 break;
             case '/':
-                opp2 = pop();
+                op2 = pop();
                 if (op2 != 0.0) {
                     push(pop() / op2);
                 } else {
@@ -39,7 +39,7 @@ int main() {
                 printf("\t%.8g\n", pop());
                 break;
             default:
-                printf("error: unknown command \"%s\"\n", s);
+                printf("error: unknown command \"%s\"\n", oper);
                 break;
         }
     }
