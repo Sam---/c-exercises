@@ -13,6 +13,7 @@ int main() {
     char oper[MAXOP];
 
     while ((type = getop(oper)) != EOF) {
+        double v;
         switch (type) {
             case NUMBER:
                 push(atof(oper));
@@ -37,7 +38,8 @@ int main() {
                 break;
             case '%':
                 op2 = pop();
-                push(pop() % op2);
+                v = pop() % op2;
+                push(v - (int)v);
                 break;
             case 'e':
                 push(2.71828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746);
