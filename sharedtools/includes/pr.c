@@ -84,14 +84,18 @@ int main(int argc, char *argv[]) {
                         pos++;
                     }
                     if (pos[0] == '"') {
+                        char *cpos;
                         filename = pos + 1;
                         *strchr(filename, '"') = '\0';
                         if (types == SYSTEMONLY) {
                             continue;
                         }
-                        *strrchr(argv[i], 'c') = 'h';
-                        if (hideown && !strcmp(filename, argv[i])) {
-                            continue;
+                        cpos = strrchr(argv[i], 'c');
+                        if (cpos) {
+                            *cpos = 'h';
+                            if (hideown && !strcmp(filename, argv[i])) {
+                                continue;
+                            }
                         }
                         putnchars('\t', indentlevel);
                         if (types == ALL) {
