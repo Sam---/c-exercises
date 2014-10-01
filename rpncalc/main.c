@@ -18,6 +18,8 @@ int main() {
             case NUMBER:
                 push(atof(oper));
                 break;
+            case NNUMBER:
+                push(-atof(oper));
             case '+':
                 push(pop() + pop());
                 break;
