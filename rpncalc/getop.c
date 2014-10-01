@@ -13,6 +13,11 @@ int getop(char s[]) {
 
     s[1] = '\0';
     if (!isdigit(c) && c != '.') {
+        int nc = getch();
+        if (nc != EOF && isdigit(nc)) {
+            ungetch(nc); ungetch(c);
+            return NUMBER;
+        }
         return c;
     }
     i = 0;
