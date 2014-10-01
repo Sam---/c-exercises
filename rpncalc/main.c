@@ -20,6 +20,7 @@ int main() {
                 break;
             case NNUMBER:
                 push(-atof(oper));
+                break;
             case '+':
                 push(pop() + pop());
                 break;
