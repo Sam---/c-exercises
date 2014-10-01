@@ -14,8 +14,8 @@ int main() {
     char oper[MAXOP];
 
     while ((type = getop(oper)) != EOF) {
-        info("gotOp");
         double v;
+        info("gotOp");
         switch (type) {
             case NUMBER:
                 info("number");
