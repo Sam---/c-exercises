@@ -14,15 +14,15 @@ int main() {
     char oper[MAXOP];
 
     while ((type = getop(oper)) != EOF) {
-        INFO("gotOp");
+        info("gotOp");
         double v;
         switch (type) {
             case NUMBER:
-                INFO("number");
+                info("number");
                 push(atof(oper));
                 break;
             case NNUMBER:
-                INFO("nnumber");
+                info("nnumber");
                 push(-atof(oper));
                 break;
             case '+':
@@ -55,14 +55,14 @@ int main() {
                 printf("\t%.8g\n", pop());
                 break;
             case 'q':
-                INFO("quit");
+                info("quit");
                 return EXIT_SUCCESS;
             default:
-                INFO("Err");
+                info("Err");
                 printf("error: unknown command \"%s\"\n", oper);
                 break;
         }
     }
-    INFO("returning");
+    info("returning");
     return EXIT_SUCCESS;
 }
