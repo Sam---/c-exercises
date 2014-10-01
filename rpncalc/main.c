@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "../sharedtools/shared.h"
 
 #include "getop.h"
 #include "stack.h"
@@ -13,12 +14,15 @@ int main() {
     char oper[MAXOP];
 
     while ((type = getop(oper)) != EOF) {
+        INFO("gotOp");
         double v;
         switch (type) {
             case NUMBER:
+                INFO("number");
                 push(atof(oper));
                 break;
             case NNUMBER:
+                INFO("nnumber");
                 push(-atof(oper));
                 break;
             case '+':
@@ -51,11 +55,14 @@ int main() {
                 printf("\t%.8g\n", pop());
                 break;
             case 'q':
+                INFO("quit");
                 return EXIT_SUCCESS;
             default:
+                INFO("Err");
                 printf("error: unknown command \"%s\"\n", oper);
                 break;
         }
     }
+    INFO("returning");
     return EXIT_SUCCESS;
 }
