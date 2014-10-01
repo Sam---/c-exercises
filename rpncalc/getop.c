@@ -7,30 +7,34 @@
 
 /* getop: get next operator or numeric operand */
 int getop(char s[]) {
-    int i, c;
+    int i = 1, c;
 
-    while ((s[0] = c = getch()) == ' ' || c == '\t') ;
+    while ((c = getch()) != EOF && isspace(c));
+    if (c == EOF) {
+        return EOF;
+    }
 
-    s[1] = '\0';
-    if (!isdigit(c) && c != '.') {
-        int nc = getch();
-        if (nc != EOF && isdigit(nc)) {
-            ungetch(nc); ungetch(c);
+    s[0] = c;
+
+    while ((c = getch()) != EOF && !isspace(c)) {
+        s[i++] = c;
+    }
+    if (c == EOF) {
+        return EOF;
+    }
+    ungetch(c);
+
+    s[--i] = '\0';
+
+    if (i == 1) {
+        if (isdigit(s[0]) || s[0] == '.') {
             return NUMBER;
         }
-        return c;
+        return s[0];
     }
-    i = 0;
-    if (isdigit(c)) {
-        while (isdigit(s[++i] = c = getch()));
-    }
-    if (c == '.') {
-        while (isdigit(s[++i] = c = getch()));
-    }
-    s[i] = '\0';
-    if (c != EOF) {
-        ungetch(c);
-    }
-    return NUMBER;
-}
 
+    if (s[0] == '-') {
+        return NNUMBER;
+    }
+    return -1;
+}
