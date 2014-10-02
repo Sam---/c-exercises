@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../sharedtools/shared.h"
+#include "shared.h"
 
 #include "getop.h"
 #include "stack.h"

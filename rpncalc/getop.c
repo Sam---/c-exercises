@@ -1,6 +1,6 @@
 #include <ctype.h>
 #include <stdio.h>
-#include "../sharedtools/shared.h"
+#include "shared.h"
 
 #include "main.h"
 #include "getch.h"
