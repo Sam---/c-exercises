@@ -27,9 +27,6 @@ int getop(char s[]) {
     while ((c = getch()) != EOF && !isign(c)) {
         s[i++] = c;
     }
-    if (c == EOF) {
-        return EOF;
-    }
     ungetch(c);
 
     s[--i] = '\0';
