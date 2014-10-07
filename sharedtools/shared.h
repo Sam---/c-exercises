@@ -8,41 +8,18 @@
 /*
  * I don't like the default operators for these things in C, but I'll only
  * use these macros if I can get Vim to highlight them as operators.
+ * edit: scratch that, I did it.
+ */
 #define AND &&
 #define OR ||
 #define DEC --
 #define INC ++
-*/
+/**/
 
-int vfinfo(FILE *stream, const char format[], va_list args) {
-    int result;
-    fputs("\x1b[31m", stream);
-    result = vfprintf(stream, format, args);
-    fputs("\x1b[0m", stream);
-    return result;
-}
-
-int info(const char *format, ...) {
-    va_list args;
-    int result;
-    va_start(args, format);
-    result = vfinfo(stdout, format, args);
-    va_end(args);
-    return result;
-}
-
-bool inrange(int low, int val, int high) {
-    return low <= val && val <= high;
-}
-
-unsigned long mask(unsigned bits) {
-    return ~(~0 << bits);
-}
-
-void putnchars(char c, int n) {
-    for (; n; --n) {
-        putchar(c);
-    }
-}
+int vfinfo(FILE *stream, const char format[], va_list args);
+int info(const char *format, ...);
+bool inrange(int low, int val, int high);
+unsigned long mask(unsigned bits);
+void putnchars(char c, int n);
 
 #endif /* SHAREDTOOLS_H */
