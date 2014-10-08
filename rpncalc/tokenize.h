@@ -6,8 +6,7 @@
 #define TK_SYMBOL 2
 #define TK_NEWLINE 3
 #define TK_INVALID 4
-#define TK_WORD 5
-#define TK_INDETERMINATE 6
+#define TK_INDETERMINATE 5
 
 size_t get_tokens(char token[], size_t maxlen, int *tkclass);
 #endif /* TOKENIZE_H */
