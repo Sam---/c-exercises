@@ -53,6 +53,9 @@ size_t get_tokens(char token[], size_t maxlen, int *rtkc) {
           ) {
         token[i++] = c;
     }
+    if (c != EOF AND i < maxlen AND c) {
+        ungetch(c);
+    }
 end:
     token[i++] = '\0';
     *rtkc = tkclass;
