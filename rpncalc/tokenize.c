@@ -2,7 +2,7 @@
 #include "getch.h"
 #include "shared.h"
 
-size_t get_tokens(char token[], size_t maxlen) {
+size_t get_tokens(char token[], size_t maxlen, enum tkclass *rtkc) {
     size_t i;
     int c;
     enum tkclass tkclass;
@@ -52,5 +52,6 @@ size_t get_tokens(char token[], size_t maxlen) {
     }
 end:
     token[i++] = '\0';
+    *rtkc = tkclass;
     return i;
 }

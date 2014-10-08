@@ -8,4 +8,4 @@ enum tkclass {
     TK_INDETERMINATE
 }
 
-size_t get_tokens(char token[], size_t maxlen);
+size_t get_tokens(char token[], size_t maxlen, enum tkclass *tkclass);
