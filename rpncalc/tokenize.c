@@ -2,6 +2,8 @@
 #include "getch.h"
 #include "shared.h"
 
+#include "tokenize.h"
+
 size_t get_tokens(char token[], size_t maxlen, enum tkclass *rtkc) {
     size_t i;
     int c;
