@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ctype.h>
 #include "getch.h"
 #include "shared.h"
 
