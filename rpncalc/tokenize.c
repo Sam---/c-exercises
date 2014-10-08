@@ -45,7 +45,7 @@ size_t get_tokens(char token[], size_t maxlen, enum tkclass *rtkc) {
         goto end;
     }
 
-    while ((c = getch()) AND c != EOF AND (
+    while ((c = getch()) AND c != EOF AND i < maxlen AND (
             tkclass == TK_WORD? isalpha(c)
             : tkclass == TK_NUM? isdigit(c)
             : tkclass == TK_SYMBOL? ispunct(c)
