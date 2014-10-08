@@ -5,10 +5,10 @@
 
 #include "tokenize.h"
 
-size_t get_tokens(char token[], size_t maxlen, enum tkclass *rtkc) {
+size_t get_tokens(char token[], size_t maxlen, int *rtkc) {
     size_t i;
     int c;
-    enum tkclass tkclass;
+    int tkclass;
 
     while (isspace(c = getch()) AND c != EOF);
     if (c == EOF) return 0;

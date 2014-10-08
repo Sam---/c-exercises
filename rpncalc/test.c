@@ -7,7 +7,7 @@
 int main() {
     size_t len;
     char token[BUFMAX];
-    enum tkclass tkclass;
+    int tkclass;
 
     while (len = get_tokens(token, BUFMAX, &tkclass)) {
         char *class;
