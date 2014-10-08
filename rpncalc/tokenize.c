@@ -6,7 +6,7 @@
 #include "tokenize.h"
 
 size_t get_tokens(char token[], size_t maxlen, int *rtkc) {
-    size_t i;
+    size_t i = 0;
     int c;
     int tkclass;
 
