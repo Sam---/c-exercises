@@ -31,6 +31,7 @@ size_t get_tokens(char token[], size_t maxlen, int *rtkc) {
         }
         if (isdigit(c)) {
             tkclass = TK_NUM;
+            token[i++] = c;
         } else if (ispunct(c)) {
             tkclass = TK_SYMBOL;
             token[i++] = c;
