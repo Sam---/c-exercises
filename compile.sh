@@ -1,6 +1,7 @@
 #/bin/sh
 
 git add "$@"
+lsinc -h -l "$@" | xargs git add
 git commit
 gcc \
     -o "a.out" -std="c89" \
