@@ -26,17 +26,21 @@ size_t get_tokens(char token[], size_t maxlen, int *rtkc) {
     if (tkclass == TK_INDETERMINATE) {
         c = getch();
         if (c == EOF) {
-            tkclass = TK_NUM;
+            tkclass = TK_SYMBOL;
             goto end;
         }
-        if (isdigit(c)) tkclass = TK_NUM;
-        else if (ispunct(c)) tkclass = TK_SYMBOL;
-        else {
+        if (isdigit(c)) {
+            tkclass = TK_NUM;
+        } else if (ispunct(c)) {
+            tkclass = TK_SYMBOL;
+            token[i++] = c;
+        } else {
             tkclass = TK_SYMBOL;
             ungetch(c);
             goto end;
         }
     }
+
     if (tkclass == TK_NEWLINE) {
         goto end;
     }
