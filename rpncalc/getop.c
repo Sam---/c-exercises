@@ -18,7 +18,7 @@
 
 char *table[] = {
     "sin[e]", "cos[ine]", "tan[gent]",
-    "a[rc]sin[e]", "a[rc]tan[gent]", "a[rc]cos[ine]0"
+    "a[rc]sin[e]", "a[rc]tan[gent]", "a[rc]cos[ine]0",
     "q[uit]",
     "and", "or", "!",
     "pi", "e",
@@ -26,7 +26,7 @@ char *table[] = {
     "&", "|", "xor", "<<", ">>", "~",
     "<", ">", "=", "<=", ">=",
     "\x1b"
-}
+};
 
 int getf(char s[]) {
     size_t key;
@@ -49,7 +49,8 @@ int getf(char s[]) {
 
 
 /* getop: get next operator or numeric operand 
- * returns 0 if EOL or error else B_* */
+ * returns 0 if EOL or error else B_*
+ */
 int getop(char s[], size_t maxlen, double *num) {
     size_t tklen;
     int tkclass;
