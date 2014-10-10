@@ -8,15 +8,6 @@
 
 #include "getop.h"
 
-// int hash_string(char s[]) {
-//     size_t i = 0;
-//     int hash;
-//     while (s[i]) {
-//         hash += s[i++];
-//     }
-//     return hash;
-// }
-
 char *table[] = {
     "sin[e]", "cos[ine]", "tan[gent]",
     "a[rc]sin[e]", "a[rc]tan[gent]", "a[rc]cos[ine]0",
@@ -38,16 +29,6 @@ int getf(char s[]) {
     }
     return 0;
 }
-
-// setf(int row, char s[], size_t size) {
-//     size_t key;
-//     if (key = /* = */ getf(s)) {
-//         size_t len = min(KEYMAX, size)
-//         memcpy(table[key], s, len);
-//         memset(table[key] + len, '\0', KEYMAX - len);
-//     }
-
-
 
 /* getop: get next operator or numeric operand 
  * returns 0 if EOL or error else B_*
