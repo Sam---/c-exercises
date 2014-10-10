@@ -1,5 +1,6 @@
 #include <ctype.h>
 #include <stdio.h>
+#include <string.h>
 #include "shared.h"
 
 #include "main.h"
