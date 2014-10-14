@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
 #include "shared.h"
 
 #include "getop.h"
@@ -10,10 +11,9 @@
 
 /* RPN calculator */
 int main() {
-    size_t leng;
     char buffer[CBMAX];
     int tkclass;
-    while (leng = get_tokens(buffer, CBMAX, &tkclass)) {
+    while (get_tokens(buffer, CBMAX, &tkclass)) {
         if (tkclass == TK_WORD || tkclass == TK_SYMBOL) {
             execop(buffer);
         } else if (tkclass == TK_NUM) {
