@@ -9,6 +9,8 @@
 
 #include "main.h"
 
+#define CBMAX 1024
+
 /* RPN calculator */
 int main() {
     char buffer[CBMAX];
@@ -20,7 +22,7 @@ int main() {
             double num;
             char *end;
             errno = 0;
-            num = strtod(buffer, end);
+            num = strtod(buffer, &end);
             if (errno == ERANGE) {
                 printf("num2big?\n");
             }
