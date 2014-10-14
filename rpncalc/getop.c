@@ -2,10 +2,12 @@
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
+#include <math.h>
 #include "shared.h"
 
 #include "main.h"
 #include "tokenize.h"
+#include "stack.h"
 
 #include "getop.h"
 
