@@ -1,6 +1,8 @@
 #ifndef GETOP_H
 #define GETOP_H
 
+#define GETOP_ERANGE
+int execop(char* s);
 int getop(char s[], size_t maxlen, double *num);
 #define B_ERR 0x00
 #define B_SIN  1
