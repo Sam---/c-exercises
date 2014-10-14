@@ -9,6 +9,7 @@
 #include "tokenize.h"
 #include "stack.h"
 #include "vars.h"
+#include "getch.h"
 
 #include "getop.h"
 
