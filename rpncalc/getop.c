@@ -8,6 +8,7 @@
 #include "main.h"
 #include "tokenize.h"
 #include "stack.h"
+#include "vars.h"
 
 #include "getop.h"
 
