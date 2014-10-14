@@ -1,7 +1,6 @@
-#include <math.h>
 #include "vars.h"
 
-double vars[NVARS] = {NAN};
+double vars[NVARS] = {0.0/0.0};
 
 double putvar(char var, double val) {
     vars[var] = val;
