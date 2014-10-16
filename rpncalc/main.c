@@ -26,7 +26,7 @@ int main() {
             if (errno == ERANGE) {
                 printf("num2big?\n");
             }
-            mypush(num);
+            push(num);
         } else {
             puts("What is \"%s\" suppsed to mean?\n");
         }

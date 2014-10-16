@@ -1,2 +1,2 @@
-extern void mypush(double);
-extern double my(void);
+extern void push(double);
+extern double pop(void);
