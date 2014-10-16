@@ -1,0 +1,2 @@
+- % needs to multiply it's results by it's operand
+ * see: "10 3 % -> 0.3333333"
