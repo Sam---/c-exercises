@@ -1,17 +1,10 @@
-#include <ctype.h>
 #include <stdio.h>
-#include <errno.h>
-#include <string.h>
 #include <math.h>
-#include "shared.h"
 
-#include "main.h"
-#include "tokenize.h"
 #include "stack.h"
 #include "vars.h"
-#include "getch.h"
 
-#include "getop.h"
+#include "execop.h"
 
 int execop(char* s) {
     double tmp;

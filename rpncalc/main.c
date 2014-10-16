@@ -3,7 +3,7 @@
 #include <errno.h>
 #include "shared.h"
 
-#include "getop.h"
+#include "execop.h"
 #include "tokenize.h"
 #include "stack.h"
 
