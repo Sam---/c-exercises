@@ -5,15 +5,15 @@
 int sp = 0;
 double val[MAXDEPTH];
 
-void push(double f) {
+void mypush(double f) {
     if (sp < MAXDEPTH) {
         val[sp++] = f;
     } else {
-        printf("error: stack full, can't push %g\n", f);
+        printf("error: stack full, can't mypush %g\n", f);
     }
 }
 
-double pop(void) {
+double mypop(void) {
     if (sp > 0) {
         return val[--sp];
     } else {

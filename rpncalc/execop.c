@@ -12,10 +12,10 @@ int execop(char* s) {
         case 's':
             switch (s[1]) {
                 case 'i':
-                    push(sin(pop()));
+                    mypush(sin(mypop()));
                     break;
                 case 'q':
-                    push(sqrt(pop()));
+                    mypush(sqrt(mypop()));
                     break;
                 default:
                     printf("Not found: \"%s\"\n", s);
@@ -25,10 +25,10 @@ int execop(char* s) {
         case 'c':
             switch (s[1]) {
                 case 'o':
-                    push(cos(pop()));
+                    mypush(cos(mypop()));
                     break;
                 case 'e':
-                    push(ceil(pop()));
+                    mypush(ceil(mypop()));
                     break;
                 default:
                     printf("Not found: \"%s\"\n", s);
@@ -36,22 +36,22 @@ int execop(char* s) {
             }
             break;
         case 't':
-            push(tan(pop()));
+            mypush(tan(mypop()));
             break;
         case '^':
-            tmp = pop();
-            push(pow(pop(), tmp));
+            tmp = mypop();
+            mypush(pow(mypop(), tmp));
             break;
         case 'a':
             switch (s[1]) {
                 case 's':
-                    push(asin(pop()));
+                    mypush(asin(mypop()));
                     break;
                 case 'c':
-                    push(acos(pop()));
+                    mypush(acos(mypop()));
                     break;
                 case 't':
-                    push(atan(pop()));
+                    mypush(atan(mypop()));
                     break;
                 default:
                     printf("Not found: \"%s\"\n", s);
@@ -61,13 +61,13 @@ int execop(char* s) {
         case 'h':
             switch (s[1]) {
                 case 's':
-                    push(sinh(pop()));
+                    mypush(sinh(mypop()));
                     break;
                 case 'c':
-                    push(cosh(pop()));
+                    mypush(cosh(mypop()));
                     break;
                 case 't':
-                    push(tanh(pop()));
+                    mypush(tanh(mypop()));
                     break;
                 default:
                     printf("Not found: \"%s\"\n", s);
@@ -75,17 +75,17 @@ int execop(char* s) {
             }
             break;
         case 'l':
-            push(log(pop()));
+            mypush(log(mypop()));
             break;
         case 'f':
-            push(floor(pop()));
+            mypush(floor(mypop()));
             break;
         case '%':
-            tmp = pop();
-            push(fmod(pop(), tmp));
+            tmp = mypop();
+            mypush(fmod(mypop(), tmp));
             break;
         case '$':
-            push(getvar(s[1]));
+            mypush(getvar(s[1]));
             break;
         default:
             printf("Not found: \"%s\"\n", s);
