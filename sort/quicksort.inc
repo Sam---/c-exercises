@@ -1,3 +1,5 @@
+#include <stdbool.h>
+
 #ifndef QKSORT_NAME
 #   define QKSORT_NAME qksort
 #endif
@@ -8,14 +10,36 @@
 #   define QKSORT_LT(a, b) ((a) < (b))
 #endif
 
-void QKSORT_NAME(QKSORT_ELEM_T array[], size_t length) {
-    QKSORT_ELEM_T pivot = array[0];
-    size_t pos;
-    for ( // this isn't gonna cut it. The array, that is.
-        pos = 1;
-        pos < length - 1 && QKSORT_LT(array[pos], pivot);
-        pos++) {
+#ifndef QKSORT_PARTITION
+#   define QKSORT_PARTITION _qksort_part_for_##QKSORT_NAME
+QKSORT_ELEM_T *QKSORT_PARTITION(
+    QKSORT_ELEM_T *pivot,
+    QKSORT_ELEM_T *down, QKSORT_ELEM_T *up)
+{
+    while (true) {
+        while (*down  <= *pivot) down++;
+        while (*pivot <= *up)    up--;
+
+        if (down < up) break;
+        QKSORT_ELEM_T tmp = *down;
+        *down = *up;
+        *up = tmp;
     }
+
+    QKSORT_ELEM_T tmp = *up;
+    *up = *pivot;
+    *pivot = tmp;
+    return up;
+}
+
+#endif /* ndef QKSORT_PARTITION */
+
+
+
+
+void QKSORT_NAME(QKSORT_ELEM_T array[], size_t length) {
+    if (length < 
+    QKSORT_PARTITION(*array, array + 1, array + length - 1);
 
     array[--pos] = pivot;
     array[0] = array[pos];
