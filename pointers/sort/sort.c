@@ -13,7 +13,7 @@ size_t readlines(char *linesptr[], size_t nlines);
 void writelines(char *linesptr[], size_t nlines);
 
 int compare(const void *a, const void *b) {
-    return *(char**)a - *(char**)b;
+    return strcmp(*(char**)a, *(char**)b);
 }
 
 int main() {
