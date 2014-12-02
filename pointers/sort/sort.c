@@ -1,34 +1,56 @@
+#include <stdlib.h>
 #include <stdio.h>
+#include <stdint.h>
+#include <limits.h>
 #include <string.h>
+#include "mygetline.h"
 
 #define MAXLINES 5000
 
-char *lineptr[MAXLINES];
+char *lines[MAXLINES];
 
-int readlines(char *linesptr, int nlines);
-void writelines(char *lineptr[], int nlines);
+size_t readlines(char *linesptr[], size_t nlines);
+void writelines(char *linesptr[], size_t nlines);
 
-void myqsort(char *lineptr[], int left, int right);
+int compare(const void *a, const void *b) {
+    return *(char**)a - *(char**)b;
+}
 
 int main() {
-    int nlines;
+    size_t nlines;
 
-    if ((nlines = readlines(lineptr, MAXLINES)) >= 0) {
-        myqsort(linesptr, 0, nlines-1);
-        writelines(lineptr, nlines);
+    if ((nlines = readlines(lines, MAXLINES)) < SIZE_MAX) {
+        qsort(lines, nlines-1, sizeof *lines, compare);
+        writelines(lines, nlines);
         return 0;
     } else {
-        printf("error: input too big to sort\n");
+        fprintf(stderr, "error: input too big to sort\n");
         return 1;
     }
 }
 
 #define MAXLEN 1000 /* Maximum length of a single line */
-int mygetline(char *buffer, int);
-char *alloc(int sz);
 
-int readlines(char *lineptr[], int maxlines) {
-    int len, nlines;
+size_t readlines(char *lines[], size_t maxlines) {
+    size_t len, nlines;
     char *p, line[MAXLEN];
 
-    nlines
+    nlines = 0;
+    while ((len = mygetline(line, MAXLEN)) > 0) {
+        if (nlines >= maxlines || (p = malloc(len)) == NULL) {
+            return SIZE_MAX;
+        } else {
+            line[len-1] = '\0'; /* delete newline */
+            strcpy(p, line);
+            lines[nlines++] = p;
+        }
+    }
+    return nlines;
+}
+
+void writelines(char *linesptr[], size_t nlines) {
+    size_t i;
+    for (i = 0; i < nlines; i++) printf("%s\n", linesptr[i]);
+}
+
+

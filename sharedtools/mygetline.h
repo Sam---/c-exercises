@@ -3,8 +3,8 @@
 
 #include <stdio.h>
 
-size_t fmygetline(char s[], size_t max, FILE *stream) {
-    size_t chars;
+size_t myfgetline(char s[], size_t max, FILE *stream) {
+    size_t chars = 0;
     int c;
     while ((c = fgetc(stream)) != EOF && (chars < max - 1)) {
         s[chars++] = (char)c;
