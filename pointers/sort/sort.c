@@ -20,7 +20,7 @@ int main() {
     size_t nlines;
 
     if ((nlines = readlines(lines, MAXLINES)) < SIZE_MAX) {
-        qsort(lines, nlines-1, sizeof *lines, compare);
+        qsort(lines, nlines, sizeof *lines, compare);
         writelines(lines, nlines);
         return 0;
     } else {
