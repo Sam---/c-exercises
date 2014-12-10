@@ -4,20 +4,22 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-struct rotbuf {
+typedef struct rotbuf_s {
     char **base;
     size_t n;
     size_t cur;
-};
+} RotBuf;
 
-struct rotbuf_iter {
-    struct rotbuf rb;
+typedef struct rotbuf_iter_s {
+    RotBuf rb;
     size_t cur;
     bool passed;
-};
+} RotBufIter;
 
-void rotbuf_insert(struct rotbuf, char *val);
-struct rotbuf_iter rotbuf_each_reverse(struct rotbuf);
-char *rotbuf_next(struct rotbuf_iter);
+RotBuf rotbuf_new(size_t);
+void rotbuf_insert(RotBuf, RString);
+
+RotBufIter rotbuf_each_reverse(RotBuf);
+RString rotbuf_iter_next(RotBufIter);
 
 #endif /* ROTBUF_H */

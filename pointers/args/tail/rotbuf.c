@@ -2,6 +2,14 @@
 #include <stdlib.h>
 #include "rotbuf.h"
 
+struct rotbuf rotbuf_new(size_t n) {
+    struct rotbuf self;
+    self.n = n;
+    self.base = calloc(n, sizeof (char*));
+    self.cur = 0;
+    return self;
+}
+
 void rotbuf_insert(struct rotbuf self, char *val) {
     self.base[self.cur++] = val;
     self.cur %= self.n;
