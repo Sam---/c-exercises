@@ -21,3 +21,5 @@ tail.o: tail.c rotbuf.h
 rotbuf.o: rotbuf.c rotbuf.h
 	$(CC) $(CFLAGS) -c -o rotbuf.o rotbuf.c
 
+alt-tail: ntail.c
+	$(CC) $(CFLAGS) -o alt-tail ntail.c
