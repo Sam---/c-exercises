@@ -1,3 +1,4 @@
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -25,12 +26,28 @@ void dumplines(char *lines, size_t maxlen, size_t n, FILE *stream) {
     }
 }
 
-int main(/*int argc, char **argv*/) {
-    size_t nlines = 4;
+int main(int argc, char **argv) {
+    size_t nlines;
     const size_t linemax = 2 KB;
-    char *lines = malloc(linemax * nlines);
+    char *lines;
+    size_t ngot;
 
-    size_t ngot = trygetlines(lines, linemax, nlines, stdin);
+    errno = 0;
+    if (argc >= 2) {
+        char *end;
+        nlines = strtoul(argv[1], &end, 10);
+        if (errno == ERANGE) {
+            fprintf(stderr, "Argument out of range\n");
+            return EXIT_FAILURE;
+        } else if (*end) {
+            fprintf(stderr, "Invalid integer as argument\n");
+            return EXIT_FAILURE;
+        }
+    } else {
+        nlines = 10;
+    }
+    lines = malloc(linemax * nlines);
+    ngot = trygetlines(lines, linemax, nlines, stdin);
     if (ngot < nlines) {
         dumplines(lines, linemax, ngot, stdout);
     } else {
