@@ -20,6 +20,7 @@ int compare(const void *a, const void *b) {
     return strcoll(*(char**)a, *(char**)b);
 }
 
+/* ex. 5-7 */
 int main() {
     size_t nlines;
     static char bigbuffer[BUFLEN];
